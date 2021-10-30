@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import MapleItemStats from './MapleItemStats';
 
 const MapleItem = (props) => {
-  const { title, img, reqLevel, attack, price } = props;
+  const { title, img } = props;
   const [ quantity, setQuantity ] = useState(props.quantity);
 
   const buyItem = () => {
@@ -19,10 +20,8 @@ const MapleItem = (props) => {
         {title}
       </h4>
       <img src={img} alt=''/>
-      <p>REQ Level: {reqLevel}</p>
-      <p>Attack: {attack}</p>
-      <p>Price: {price} mesos</p>
-      <p>Quantity: {quantity}</p>
+      <MapleItemStats {...props}/>
+      <p><b>Quantity: </b>{quantity}</p>
       <button className='mapleButton' onClick={buyItem}>
         Buy Item
       </button>
