@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 
-import './index.css';
-
 import MapleItemList from './components/MapleItemList';
+
+import './index.css';
 
 const App = () => {
   return(
