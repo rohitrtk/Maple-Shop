@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { pStorage } from '../firebaseConfig';
+import { storage } from '../firebaseConfig';
 
 const useStorage = (file) => {
   const [progress, setProgress] = useState(0);
@@ -7,7 +7,7 @@ const useStorage = (file) => {
   const [url, setUrl] = useState(null);
 
   useEffect(() => {
-    const storageRef = pStorage.ref(file.name);
+    const storageRef = storage.ref(file.name);
     storageRef.put(file).on('state_changed', (snapshot) => {
       const totalBytes = snapshot.totalBytes;
       const transferredBytes = snapshot.bytesTransferred;

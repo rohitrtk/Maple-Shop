@@ -1,14 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import MapleItemStats from './MapleItemStats';
 import { prettyInt } from '../utility';
 
+import { db } from '../firebaseConfig';
+import { collection, doc, onSnapshot, updateDoc } from '@firebase/firestore';
+
 const MapleItem = (props) => {
-  const { title, url, price, stats, type } = props;
+  const { title, url, price, stats, type, id } = props;
   const [ quantity, setQuantity ] = useState(props.quantity);
 
-  const buyItem = () => {
+  const buyItem = async () => {    
+    console.log('click');
+    const itemRef = doc(db, 'items', id);
+
     if(quantity > 0) {
-      setQuantity(quantity - 1);
+      setQuantity(quantity - 1)
+      await updateDoc(itemRef, {
+        quantity: quantity
+      });
       return;
     }
 

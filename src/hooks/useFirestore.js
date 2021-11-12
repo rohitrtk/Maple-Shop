@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react';
-import { pFirestore } from '../firebaseConfig';
+import { db } from '../firebaseConfig';
 
 const useFirestore = (collection) => {
   const [docs, setDocs] = useState([]);
 
   useEffect(() => {
-    const unsub = pFirestore.collection(collection)
-      .onSnapshop((snapshop) => {
+    const unsub = db.collection(collection)
+      .onSnapshot((snapshot) => {
         let documents = [];
-        snapshop.forEach((doc) => {
+        snapshot.forEach((doc) => {
           documents.push({...doc.data(), id: doc.id});
         });
         setDocs(documents);
@@ -16,7 +16,7 @@ const useFirestore = (collection) => {
     return () => unsub();
   }, [collection]);
 
-  return { docs };
+  return docs;
 }
 
 export default useFirestore;

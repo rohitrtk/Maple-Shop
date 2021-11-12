@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react';
+import { collection, onSnapshot } from '@firebase/firestore';
+import { db } from '../firebaseConfig';
 
 import MapleItem from './MapleItem';
-
-import { pFirestore as db } from '../firebaseConfig';
-import { collection, onSnapshot } from '@firebase/firestore';
 
 const MapleItemList = () => {
   const [items, setItems] = useState([]);
@@ -14,7 +13,7 @@ const MapleItemList = () => {
         return {...doc.data(), id: doc.id};
       }));
     }), []);
-  
+
   return(
     <section className='mapleItemList'> {
       items.map((item) => {
